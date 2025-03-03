@@ -1,10 +1,13 @@
 public final class CountBoxes implements Runnable {
-  private static volatile int counter;
+  private static int counter;
   // ...
+  private static final Object lock = new Object();
  
-  public synchronized void run() {
-    counter++;
-    // ...
+  public void run() {
+    synchronized (lock) {
+      counter++;
+      // ...
+    }
   }
   // ...
 }
